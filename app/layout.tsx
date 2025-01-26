@@ -4,12 +4,12 @@ import "./globals.css";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair-display",
-  subsets: ["latin"],
+  subsets: ["latin"], // Mendukung karakter Latin
 });
 
 const inter = Inter({
   variable: "--font-inter",
-  subsets: ["latin"],
+  subsets: ["latin"], // Mendukung karakter Latin
 });
 
 export const metadata: Metadata = {
