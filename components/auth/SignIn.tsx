@@ -1,15 +1,18 @@
-import { signIn } from "@/auth";
-import { redirect } from "next/dist/server/api-utils";
+"use client";
+import { signIn } from "next-auth/react";
+import { Button } from "../ui/button";
 
-export default function SignIn() {
+type SignInProps = {
+  className?: string;
+};
+
+export function SignIn({ className }: SignInProps) {
   return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn("github", { redirectTo: "/" });
-      }}
+    <Button
+      className={className}
+      onClick={() => signIn("github", { redirectTo: "/" })}
     >
-      <button type="submit">Signin with GitHub</button>
-    </form>
+      Sign In
+    </Button>
   );
 }
