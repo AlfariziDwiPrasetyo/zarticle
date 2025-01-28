@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
         <SessionProvider>
           <Navbar />
-          {children}
+          <main>{children}</main>
         </SessionProvider>
       </body>
     </html>

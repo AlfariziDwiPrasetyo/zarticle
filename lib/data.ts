@@ -28,4 +28,6 @@ const navMenuAuthenticated = [
   },
 ];
 
-export { navMenu, navMenuAuthenticated };
+const texts = ["Writing", "Narrative", "Storytelling", "Journalism"];
+
+export { navMenu, navMenuAuthenticated, texts };
