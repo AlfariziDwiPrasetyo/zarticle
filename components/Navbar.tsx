@@ -1,12 +1,33 @@
-import React, { Suspense } from "react";
-import { Button } from "./ui/button";
+"use client";
+import React, { useState, useEffect } from "react";
 import NavMenu from "./NavMenu";
 import { AvatarDropdown } from "./AvatarDropdown";
 import { MobileNav } from "./MobileNav";
 
 function Navbar() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="w-full px-7 py-3 flex items-center justify-between">
+    <nav
+      className={`w-full px-7 py-3 flex items-center justify-between top-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-white fixed bg-background/50 backdrop-blur supports-[backdrop-filter]:bg-backgroud/60"
+          : "bg-transparent"
+      }`}
+    >
       <div>
         <h1 className="playfair text-lg md:text-2xl font-semibold">Zarticle</h1>
       </div>
