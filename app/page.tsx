@@ -1,8 +1,10 @@
+import Card from "@/components/Card";
 import SearchInput from "@/components/SearchInput";
 import { Button } from "@/components/ui/button";
 import { MorphingText } from "@/components/ui/morphing-text";
 import { WordRotate } from "@/components/ui/word-rotate";
 import { texts } from "@/lib/data";
+import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 
 export default function Home() {
   return (
@@ -29,12 +31,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-6">
+      <section className="px-6 mt-5">
         <div className="flex px-6 justify-between items-center">
-          <h2 className="text-lg font-semibold">Featured Articles</h2>
-          <Button className="text-xs" variant={"outline"}>
-            View All Articles
-          </Button>
+          <h2 className="text-2xl font-semibold">Recent Articles</h2>
+          <InteractiveHoverButton>View All Articles</InteractiveHoverButton>
+        </div>
+
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 col-span-3 gap-6 py-5 px-6">
+          <Card />
+          <Card />
+          <Card />
         </div>
       </section>
     </>
