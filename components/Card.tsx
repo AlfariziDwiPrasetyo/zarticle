@@ -22,34 +22,37 @@ function Card() {
       <div className="flex">
         <div className="space-y-2">
           <div className="flex justify-between">
-            <Link className="text-[12px] text-muted-foreground" href={"/"}>
+            <Link
+              className="md:text-[12px] text-[8px] text-muted-foreground"
+              href={"/"}
+            >
               #{" "}
-              <span className="hover:underline decoration-blue-600 decoration-wavy">
+              <span className="hover:underline  decoration-blue-600 decoration-wavy">
                 Javascript
               </span>
             </Link>
-            <p className="text-[12px] text-muted-foreground">
+            <p className="text-[8px] md:text-[12px] text-muted-foreground">
               {diffForHumans("2025-01-23 14:08:37")}
             </p>
           </div>
 
           <Link className="flex justify-between" href={"/"}>
-            <h3 className="text-xl font-semibold">
+            <h3 className="text-sm md:text-xl font-semibold">
               Lorem ipsum dolor sit, amet consectetur amet consectetur amet
               consectetur
             </h3>
-            <ArrowUpRight size={30} />
+            <ArrowUpRight className="hidden md:block" size={30} />
           </Link>
 
           <div className="flex pt-1.5 justify-between">
             <Link href={"/"} className="flex items-center gap-2">
-              <Avatar className="cursor-pointer w-7 h-7">
+              <Avatar className="cursor-pointer w-4 h-4 md:w-7 md:h-7">
                 <AvatarImage
                   src={"https://avatars.githubusercontent.com/u/73646845?v=4"}
                 />
                 <AvatarFallback>{"yoerdanatan"}</AvatarFallback>
               </Avatar>
-              <p className=" font-semibold text-[12px]">
+              <p className="font-semibold  text-[8px] md:text-[12px]">
                 Al Farizi Dwi Prasetyo
               </p>
             </Link>
