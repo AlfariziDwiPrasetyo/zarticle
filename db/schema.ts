@@ -9,6 +9,13 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
 
+export const categories = pgTable("categories", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+  updatedAt: timestamp("updated_at").notNull().defaultNow(),
+});
+
 export const articles = pgTable("articles", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
@@ -17,6 +24,9 @@ export const articles = pgTable("articles", {
   userId: integer("user_id")
     .notNull()
     .references(() => users.id),
+  categoryId: integer("category_id")
+    .notNull()
+    .references(() => categories.id),
   createdAt: timestamp("created_at").notNull().defaultNow(),
   updatedAt: timestamp("updated_at").notNull().defaultNow(),
 });
@@ -32,6 +42,10 @@ export const comments = pgTable("comments", {
 
 export const articlesRelations = relations(articles, ({ one, many }) => ({
   user: one(users, { fields: [articles.userId], references: [users.id] }),
+  category: one(categories, {
+    fields: [articles.categoryId],
+    references: [categories.id],
+  }),
   comments: many(comments),
 }));
 
@@ -42,4 +56,8 @@ export const usersRelations = relations(users, ({ many }) => ({
 export const commentsRelations = relations(comments, ({ one }) => ({
   post: one(articles, { fields: [comments.postId], references: [articles.id] }),
   user: one(users, { fields: [comments.userId], references: [users.id] }),
+}));
+
+export const categoriesRelations = relations(categories, ({ many }) => ({
+  articles: many(articles),
 }));

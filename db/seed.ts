@@ -1,4 +1,4 @@
-import { users, articles, comments } from "./schema";
+import { users, articles, comments, categories } from "./schema";
 import { config } from "dotenv";
 import { drizzle } from "drizzle-orm/neon-http";
 
@@ -12,6 +12,18 @@ async function seedDatabase() {
   await db.delete(comments);
   await db.delete(articles);
   await db.delete(users);
+  await db.delete(categories);
+
+  const categoryRecords = await db
+    .insert(categories)
+    .values([
+      { name: "JavaScript" },
+      { name: "React" },
+      { name: "Databases" },
+      { name: "CSS" },
+      { name: "TypeScript" },
+    ])
+    .returning();
 
   const userRecords = await db
     .insert(users)
@@ -33,30 +45,35 @@ async function seedDatabase() {
         content: "Closures are a fundamental concept in JavaScript...",
         thumbnail: "https://example.com/images/js-closures.png",
         userId: userRecords[0].id,
+        categoryId: categoryRecords[0].id,
       },
       {
         title: "Exploring React Hooks",
         content: "React Hooks have revolutionized state management...",
         thumbnail: "https://example.com/images/react-hooks.png",
         userId: userRecords[1].id,
+        categoryId: categoryRecords[1].id,
       },
       {
         title: "A Guide to PostgreSQL",
         content: "PostgreSQL is a powerful, open-source database...",
         thumbnail: null,
         userId: userRecords[2].id,
+        categoryId: categoryRecords[2].id,
       },
       {
         title: "CSS Grid vs Flexbox",
         content: "When should you use Grid and when to use Flexbox?",
         thumbnail: "https://example.com/images/css-grid.png",
         userId: userRecords[3].id,
+        categoryId: categoryRecords[3].id,
       },
       {
         title: "TypeScript Tips and Tricks",
         content: "Improve your TypeScript development with these tips...",
         thumbnail: null,
         userId: userRecords[4].id,
+        categoryId: categoryRecords[4].id,
       },
     ])
     .returning();
