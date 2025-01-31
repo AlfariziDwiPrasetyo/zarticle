@@ -2,6 +2,8 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { diffForHumans } from "@/lib/utils";
 
 function Card() {
   return (
@@ -18,7 +20,19 @@ function Card() {
       </Link>
 
       <div className="flex">
-        <div>
+        <div className="space-y-2">
+          <div className="flex justify-between">
+            <Link className="text-[12px] text-muted-foreground" href={"/"}>
+              #{" "}
+              <span className="hover:underline decoration-blue-600 decoration-wavy">
+                Javascript
+              </span>
+            </Link>
+            <p className="text-[12px] text-muted-foreground">
+              {diffForHumans("2025-01-23 14:08:37")}
+            </p>
+          </div>
+
           <Link className="flex justify-between" href={"/"}>
             <h3 className="text-xl font-semibold">
               Lorem ipsum dolor sit, amet consectetur amet consectetur amet
@@ -26,11 +40,20 @@ function Card() {
             </h3>
             <ArrowUpRight size={30} />
           </Link>
-          <p className="text-muted-foreground">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Consequuntur excepturi at voluptatem perferendis. Est nihil harum
-            quidem, dolorum nam ipsam fuga repudiandae, eligendi
-          </p>
+
+          <div className="flex pt-1.5 justify-between">
+            <Link href={"/"} className="flex items-center gap-2">
+              <Avatar className="cursor-pointer w-7 h-7">
+                <AvatarImage
+                  src={"https://avatars.githubusercontent.com/u/73646845?v=4"}
+                />
+                <AvatarFallback>{"yoerdanatan"}</AvatarFallback>
+              </Avatar>
+              <p className=" font-semibold text-[12px]">
+                Al Farizi Dwi Prasetyo
+              </p>
+            </Link>
+          </div>
         </div>
       </div>
     </div>
