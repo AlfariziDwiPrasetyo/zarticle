@@ -4,18 +4,14 @@ import Link from "next/link";
 import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { diffForHumans } from "@/lib/utils";
+import { Article } from "@/lib/types";
 
-type CardProps = {
-  title: string;
-  thumbnail: string;
-};
-
-function Card({ title, thumbnail }: CardProps) {
+function Card({ article }: { article: Article }) {
   return (
     <div className="w-full space-y-4">
       <Link href={"/"}>
         <Image
-          src={thumbnail}
+          src={article.thumbnail || ""}
           height={200}
           width={500}
           alt="image article w-full"
@@ -40,7 +36,9 @@ function Card({ title, thumbnail }: CardProps) {
           </div>
 
           <Link className="flex justify-between" href={"/"}>
-            <h3 className="text-sm md:text-xl font-semibold">{title}</h3>
+            <h3 className="text-sm md:text-xl font-semibold">
+              {article.title}
+            </h3>
           </Link>
 
           <div className="flex pt-1.5 justify-between">
