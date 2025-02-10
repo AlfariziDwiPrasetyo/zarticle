@@ -5,10 +5,12 @@ import { desc } from "drizzle-orm";
 
 export async function getArticles() {
   try {
-    const data = await db
-      .select()
-      .from(articles)
-      .orderBy(desc(articles.createdAt));
+    const data = await db.query.articles.findMany({
+      with: {
+        user: true,
+        category: true,
+      },
+    });
     return {
       success: true,
       data,

@@ -6,7 +6,19 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { diffForHumans } from "@/lib/utils";
 import { Article } from "@/lib/types";
 
-function Card({ article }: { article: Article }) {
+type CardProps = {
+  thumbnail: string;
+  title: string;
+  createdAt: string;
+  user: {
+    name: string;
+  };
+  category: {
+    name: string;
+  };
+};
+
+function Card({ article }: { article: CardProps }) {
   return (
     <div className="w-full space-y-4">
       <Link href={"/"}>
@@ -27,7 +39,7 @@ function Card({ article }: { article: Article }) {
             >
               #{" "}
               <span className="hover:underline  decoration-blue-600 decoration-wavy">
-                Javascript
+                {article.category.name}
               </span>
             </Link>
             <p className="text-[8px] md:text-[12px] text-muted-foreground">
@@ -50,7 +62,7 @@ function Card({ article }: { article: Article }) {
                 <AvatarFallback>{"yoerdanatan"}</AvatarFallback>
               </Avatar>
               <p className="font-semibold  text-[8px] md:text-[12px]">
-                Al Farizi Dwi Prasetyo
+                {article.user.name}
               </p>
             </Link>
           </div>
