@@ -5,14 +5,17 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { diffForHumans } from "@/lib/utils";
 
-function Card() {
+type CardProps = {
+  title: string;
+  thumbnail: string;
+};
+
+function Card({ title, thumbnail }: CardProps) {
   return (
     <div className="w-full space-y-4">
       <Link href={"/"}>
         <Image
-          src={
-            "https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?q=80&w=1770&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
+          src={thumbnail}
           height={200}
           width={500}
           alt="image article w-full"
@@ -37,11 +40,7 @@ function Card() {
           </div>
 
           <Link className="flex justify-between" href={"/"}>
-            <h3 className="text-sm md:text-xl font-semibold">
-              Lorem ipsum dolor sit, amet consectetur amet consectetur amet
-              consectetur
-            </h3>
-            <ArrowUpRight className="hidden md:block" size={30} />
+            <h3 className="text-sm md:text-xl font-semibold">{title}</h3>
           </Link>
 
           <div className="flex pt-1.5 justify-between">
