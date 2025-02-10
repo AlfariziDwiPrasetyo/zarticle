@@ -6,19 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { diffForHumans } from "@/lib/utils";
 import { Article } from "@/lib/types";
 
-type CardProps = {
-  thumbnail: string;
-  title: string;
-  createdAt: string;
-  user: {
-    name: string;
-  };
-  category: {
-    name: string;
-  };
-};
-
-function Card({ article }: { article: CardProps }) {
+function Card({ article }: { article: Article }) {
   return (
     <div className="w-full space-y-4">
       <Link href={"/"}>
