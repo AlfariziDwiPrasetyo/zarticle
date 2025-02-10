@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1737880066708,
-      "tag": "0000_high_odin",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1737880323381,
-      "tag": "0001_moaning_robin_chapel",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1738318564296,
-      "tag": "0002_lonely_vargas",
+      "when": 1739180310922,
+      "tag": "0000_bizarre_miracleman",
       "breakpoints": true
     }
   ]

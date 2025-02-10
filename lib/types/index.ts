@@ -21,3 +21,9 @@ export type Category = InferSelectModel<typeof categories> & {
 };
 
 export type CreateArticleInput = InferInsertModel<typeof articles>;
+
+export type CreateUserInput = {
+  name: string;
+  email: string;
+  image: string;
+};
