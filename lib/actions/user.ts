@@ -17,6 +17,9 @@ export async function getUsersByEmail(email: string) {
   try {
     const data = await db.query.users.findFirst({
       where: eq(users.email, email),
+      with: {
+        articles: true,
+      },
     });
     return { success: true, data };
   } catch (error) {
