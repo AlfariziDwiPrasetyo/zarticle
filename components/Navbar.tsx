@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import NavMenu from "./NavMenu";
 import { AvatarDropdown } from "./AvatarDropdown";
 import { MobileNav } from "./MobileNav";
+import Link from "next/link";
 
 function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +30,11 @@ function Navbar() {
       }`}
     >
       <div>
-        <h1 className="playfair text-lg md:text-2xl font-semibold">Zarticle</h1>
+        <Link href={"/"}>
+          <h1 className="playfair text-lg md:text-2xl font-semibold">
+            Zarticle<span className="font-bold text-3xl text-blue-600">.</span>
+          </h1>
+        </Link>
       </div>
       <div className="hidden md:block">
         <NavMenu />
