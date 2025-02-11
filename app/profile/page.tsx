@@ -1,9 +1,7 @@
 import { auth } from "@/auth";
-import ArticlesList from "@/components/ArticlesList";
+import Card from "@/components/Card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { getArticles } from "@/lib/actions/article";
 import { getUsersByEmail } from "@/lib/actions/user";
-import { User } from "@/lib/types";
 import React from "react";
 
 async function page() {
@@ -14,8 +12,6 @@ async function page() {
   }
 
   const { data: user } = await getUsersByEmail(session?.user?.email);
-
-  const { data: article } = await getArticles();
 
   if (!user) {
     return <div>Not authenticated</div>;
@@ -37,9 +33,11 @@ async function page() {
       <section className="p-10 w-full">
         <h2 className="text-xl lg:text-2xl font-bold">Articles</h2>
         <div className="bg-gray-100 py-5 mt-5 rounded-md">
-          {user.articles.length == 0 ? (
+          {user.articles.length > 0 ? (
             <div className="grid lg:grid-cols-2 gap-7">
-              <ArticlesList />
+              {user.articles?.map((article) => (
+                <Card key={article.id} article={article} />
+              ))}
             </div>
           ) : (
             <p className=" text-center">This user has no article yet</p>

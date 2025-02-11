@@ -27,7 +27,7 @@ function Card({ article }: { article: Article }) {
             >
               #{" "}
               <span className="hover:underline  decoration-blue-600 decoration-wavy">
-                {article.category.name}
+                {article?.category?.name}
               </span>
             </Link>
             <p className="text-[8px] md:text-[12px] text-muted-foreground">
@@ -50,7 +50,7 @@ function Card({ article }: { article: Article }) {
                 <AvatarFallback>{"yoerdanatan"}</AvatarFallback>
               </Avatar>
               <p className="font-semibold  text-[8px] md:text-[12px]">
-                {article.user.name}
+                {article?.user?.name}
               </p>
             </Link>
           </div>

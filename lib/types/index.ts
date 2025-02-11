@@ -2,8 +2,8 @@ import { articles, categories, comments, users } from "@/db/schema";
 import { InferSelectModel, InferInsertModel } from "drizzle-orm";
 
 export type Article = InferSelectModel<typeof articles> & {
-  user: User;
-  category: Category;
+  user?: User;
+  category?: Category;
   comments?: Comment[];
 };
 
