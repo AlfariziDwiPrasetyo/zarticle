@@ -44,10 +44,8 @@ function Card({ article }: { article: Article }) {
           <div className="flex pt-1.5 justify-between">
             <Link href={"/"} className="flex items-center gap-2">
               <Avatar className="cursor-pointer w-4 h-4 md:w-7 md:h-7">
-                <AvatarImage
-                  src={"https://avatars.githubusercontent.com/u/73646845?v=4"}
-                />
-                <AvatarFallback>{"yoerdanatan"}</AvatarFallback>
+                <AvatarImage src={article.user?.image || ""} />
+                <AvatarFallback>{article.user?.name}</AvatarFallback>
               </Avatar>
               <p className="font-semibold  text-[8px] md:text-[12px]">
                 {article?.user?.name}
