@@ -16,6 +16,7 @@ import { SignIn } from "./auth/SignIn";
 import { useSession } from "next-auth/react";
 import { Separator } from "./ui/separator";
 import Image from "next/image";
+import Link from "next/link";
 
 export function MobileNav() {
   const { data: session } = useSession();
@@ -38,14 +39,15 @@ export function MobileNav() {
         <div className="pb-2">
           <ul className="space-y-3">
             {navMenu.map((menu) => (
-              <li
+              <Link
                 key={menu.name}
-                className=" hover:bg-gray-300 p-3 rounded-md  transition-all duration-300 ease-in-out"
+                href={menu.link}
+                className="text-md font-semibold cursor-pointer"
               >
-                <a href={menu.link} className="text-md font-semibold">
+                <li className=" hover:bg-gray-300 p-3 rounded-md  transition-all duration-300 ease-in-out">
                   {menu.name}
-                </a>
-              </li>
+                </li>
+              </Link>
             ))}
           </ul>
         </div>
