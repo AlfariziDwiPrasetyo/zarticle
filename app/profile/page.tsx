@@ -1,7 +1,10 @@
 import { auth } from "@/auth";
 import Card from "@/components/Card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import { getUsersByEmail } from "@/lib/actions/user";
+import { PlusCircle } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 async function page() {
@@ -31,7 +34,14 @@ async function page() {
       </section>
 
       <section className="p-10 w-full">
-        <h2 className="text-xl lg:text-2xl font-bold">Articles</h2>
+        <div className="flex justify-between">
+          <h2 className="text-xl lg:text-2xl font-bold">Articles</h2>
+          <Link href="/upload/new">
+            <Button className="font-bold" variant="outline">
+              Create Article <PlusCircle />
+            </Button>
+          </Link>
+        </div>
         <div className="bg-gray-100 py-5 mt-5 rounded-md">
           {user.articles.length > 0 ? (
             <div className="grid lg:grid-cols-2 gap-7">
