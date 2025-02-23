@@ -4,6 +4,10 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import { SessionProvider } from "next-auth/react";
 
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "@/app/api/uploadthing/core";
+
 const playfair = Playfair_Display({
   variable: "--font-playfair-display",
   subsets: ["latin"], // Mendukung karakter Latin
@@ -27,6 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${inter.variable} antialiased`}>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <SessionProvider>
           <Navbar />
           <main>{children}</main>
