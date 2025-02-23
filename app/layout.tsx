@@ -34,7 +34,7 @@ export default function RootLayout({
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <SessionProvider>
           <Navbar />
-          <main>{children}</main>
+          <main className="pt-[3rem]">{children}</main>
         </SessionProvider>
       </body>
     </html>
