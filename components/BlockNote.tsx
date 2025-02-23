@@ -24,11 +24,9 @@ export default function BlockNote() {
     onChange();
   }, []);
 
-  console.log(html);
-
   return (
     <BlockNoteView
-      className="px-1 md:px-12"
+      className="px-1"
       editor={editor}
       theme="light"
       onChange={onChange}

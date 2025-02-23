@@ -16,6 +16,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "i.pravtar.cc",
       },
+      {
+        protocol: "https",
+        hostname: "50ymvpho8f.ufs.sh",
+      },
     ],
   },
 };
