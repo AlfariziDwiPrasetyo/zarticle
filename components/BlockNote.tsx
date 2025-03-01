@@ -6,17 +6,20 @@ import { BlockNoteView } from "@blocknote/shadcn";
 import "@blocknote/shadcn/style.css";
 import { useEffect, useRef, useState } from "react";
 
-export default function BlockNote() {
+type BlockNoteProps = {
+  onContentChange: (content: string) => void;
+};
+
+export default function BlockNote({ onContentChange }: BlockNoteProps) {
   const editor = useCreateBlockNote();
-  const [html, setHTML] = useState<string>("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const onChange = async () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
 
     timeoutRef.current = setTimeout(async () => {
-      const html = await editor.blocksToHTMLLossy(editor.document);
-      setHTML(html);
+      const content = await editor.blocksToHTMLLossy(editor.document);
+      onContentChange(content);
     }, 500);
   };
 

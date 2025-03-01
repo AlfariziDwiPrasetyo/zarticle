@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import { Toaster } from "@/components/ui/sonner";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair-display",
@@ -35,6 +36,7 @@ export default function RootLayout({
         <SessionProvider>
           <Navbar />
           <main className="pt-[3rem]">{children}</main>
+          <Toaster richColors />
         </SessionProvider>
       </body>
     </html>
