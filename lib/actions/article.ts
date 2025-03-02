@@ -1,11 +1,10 @@
 "use server";
 
 import { db } from "@/db";
-import { CreateArticleInput } from "../types";
+import { Article, CreateArticleInput } from "../types";
 import { articles } from "@/db/schema";
 import { desc, eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export async function getArticles() {
   try {
@@ -21,6 +20,32 @@ export async function getArticles() {
     };
   } catch (error) {
     return { success: false, message: "Failed to get articles" };
+  }
+}
+
+export async function getArticleById(id: string) {
+  try {
+    const article = await db.query.articles.findFirst({
+      where: (articles, { eq }) => eq(articles.id, id),
+      with: {
+        comments: {
+          with: {
+            user: true,
+          },
+        },
+        user: true,
+        category: true,
+      },
+    });
+
+    if (!article) {
+      throw new Error("Article not found");
+    }
+
+    return article;
+  } catch (error) {
+    console.log("Error occured : ", error);
+    throw new Error("Error");
   }
 }
 

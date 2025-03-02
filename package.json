@@ -24,6 +24,7 @@
     "@radix-ui/react-select": "^2.1.6",
     "@radix-ui/react-separator": "^1.1.1",
     "@radix-ui/react-slot": "^1.1.1",
+    "@tailwindcss/typography": "^0.5.16",
     "@tiptap/react": "^2.11.5",
     "@tiptap/starter-kit": "^2.11.5",
     "@uploadthing/react": "^7.3.0",
@@ -45,7 +46,8 @@
     "sonner": "^2.0.1",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
-    "uploadthing": "^7.5.2"
+    "uploadthing": "^7.5.2",
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "@types/node": "^20",

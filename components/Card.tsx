@@ -19,7 +19,7 @@ type CardProps = {
 function Card({ article, type }: CardProps) {
   return (
     <div className="w-full space-y-4">
-      <Link href={"/"}>
+      <Link href={`/articles/${article.id}`}>
         <Image
           src={article.thumbnail || ""}
           height={200}
@@ -46,7 +46,10 @@ function Card({ article, type }: CardProps) {
             </p>
           </div>
 
-          <Link className="flex justify-between" href={"/"}>
+          <Link
+            className="flex justify-between"
+            href={`/articles/${article.id}`}
+          >
             <h3 className="text-sm md:text-xl font-semibold">
               {article.title}
             </h3>
