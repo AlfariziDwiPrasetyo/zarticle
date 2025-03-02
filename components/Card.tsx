@@ -7,6 +7,9 @@ import { diffForHumans } from "@/lib/utils";
 import { Article } from "@/lib/types";
 import { articles } from "@/db/schema";
 import { Button } from "./ui/button";
+import DeleteArticleDialog from "./DeleteArticleDialog";
+import { toast } from "sonner";
+import { deleteArticle } from "@/lib/actions/article";
 
 type CardProps = {
   type: "private" | "general";
@@ -62,11 +65,8 @@ function Card({ article, type }: CardProps) {
               </Link>
             ) : (
               <div className="flex gap-3 justify-end">
-                <Link href={"#"}>
-                  <Button variant={"destructive"}>
-                    Delete <TrashIcon />
-                  </Button>
-                </Link>
+                <DeleteArticleDialog articleId={article.id} />
+
                 <Link href={"#"}>
                   <Button>
                     Edit <EditIcon />
