@@ -5,6 +5,7 @@ import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { diffForHumans } from "@/lib/utils";
 import { Article } from "@/lib/types";
+import { articles } from "@/db/schema";
 
 function Card({ article }: { article: Article }) {
   return (
@@ -14,13 +15,14 @@ function Card({ article }: { article: Article }) {
           src={article.thumbnail || ""}
           height={200}
           width={500}
-          alt="image article w-full"
+          alt="image"
+          className="image article w-full md:h-96 object-cover"
         />
       </Link>
 
       <div className="flex">
         <div className="space-y-2">
-          <div className="flex justify-between">
+          <div className="flex gap-3">
             <Link
               className="md:text-[12px] text-[8px] text-muted-foreground"
               href={"/"}
@@ -31,7 +33,7 @@ function Card({ article }: { article: Article }) {
               </span>
             </Link>
             <p className="text-[8px] md:text-[12px] text-muted-foreground">
-              {diffForHumans("2025-01-23 14:08:37")}
+              {diffForHumans(article.createdAt)}
             </p>
           </div>
 

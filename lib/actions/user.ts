@@ -18,7 +18,11 @@ export async function getUsersByEmail(email: string) {
     const data = await db.query.users.findFirst({
       where: eq(users.email, email),
       with: {
-        articles: true,
+        articles: {
+          with: {
+            category: true,
+          },
+        },
       },
     });
     return { success: true, data };

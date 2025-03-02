@@ -3,7 +3,7 @@
 import { UploadDropzone } from "@/lib/uploadthing";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Select,
   SelectContent,
@@ -16,6 +16,9 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { getCategories } from "@/lib/actions/category";
+import { Category } from "@/lib/types";
+import { ScaleLoader } from "react-spinners";
 
 const BlockNote = dynamic(() => import("@/components/BlockNote"), {
   ssr: false,
@@ -26,12 +29,34 @@ const page = () => {
   const [title, setTitle] = useState<string>("");
   const [category, setCategory] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loadingCategory, setLoadingCategories] = useState<boolean>(false);
+  const [loadingSubmit, setLoadingSubmit] = useState<boolean>(false);
 
   const { data: session } = useSession();
   const router = useRouter();
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoadingCategories(true);
+        const allCategories = await getCategories();
+        setCategories(allCategories?.data ?? []);
+      } catch (error) {
+        console.error("Error occured : ", error);
+        toast.error("Failed to load categories");
+      } finally {
+        setLoadingCategories(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   const handler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoadingCategories(true);
+
     const data = {
       title,
       content,
@@ -40,9 +65,16 @@ const page = () => {
       categoryId: category,
     };
 
-    await createArticle(data);
-    router.push("/");
-    toast.success("Article has been created");
+    try {
+      await createArticle(data);
+      toast.success("Article has been created");
+      router.push("/");
+    } catch (error) {
+      console.error("Error occured :", error);
+      toast.error("Failed to insert article");
+    } finally {
+      setLoadingSubmit(false);
+    }
   };
 
   return (
@@ -114,9 +146,17 @@ const page = () => {
                     <SelectValue placeholder="Categories" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1">Light</SelectItem>
-                    <SelectItem value="2">Dark</SelectItem>
-                    <SelectItem value="3">System</SelectItem>
+                    {loadingCategory ? (
+                      <div className="p-2 flex justify-center">
+                        <ScaleLoader height={20} />
+                      </div>
+                    ) : (
+                      categories?.map((category: Category) => (
+                        <SelectItem key={category.id} value={category.id}>
+                          {category.name}
+                        </SelectItem>
+                      ))
+                    )}
                   </SelectContent>
                 </Select>
               </div>
@@ -134,7 +174,9 @@ const page = () => {
           </div>
 
           <div className="flex justify-end pt-5">
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={loadingSubmit}>
+              {loadingSubmit ? "Submitting..." : "Submit"}
+            </Button>
           </div>
         </form>
       </div>

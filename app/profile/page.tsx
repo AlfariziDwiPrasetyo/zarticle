@@ -20,10 +20,12 @@ async function page() {
     return <div>Not authenticated</div>;
   }
 
+  console.log(user.articles);
+
   return (
     <div className="flex flex-col lg:flex-row">
       <section className="p-10 flex flex-col lg:justify-start lg:items-start justify-center items-center">
-        <Avatar className="max-w-xl w-72 h-72">
+        <Avatar className="max-w-xl h-60 w-60 md:w-72 md:h-72">
           <AvatarImage src={user.image as string} />
           <AvatarFallback>{user.name}</AvatarFallback>
         </Avatar>
@@ -42,9 +44,9 @@ async function page() {
             </Button>
           </Link>
         </div>
-        <div className="bg-gray-100 py-5 mt-5 rounded-md">
+        <div className="bg-gray-100 p-5 mt-5 rounded-md">
           {user.articles.length > 0 ? (
-            <div className="grid lg:grid-cols-2 gap-7">
+            <div className="grid lg:grid-cols-2 gap-5">
               {user.articles?.map((article) => (
                 <Card key={article.id} article={article} />
               ))}

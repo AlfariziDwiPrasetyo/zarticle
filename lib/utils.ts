@@ -6,8 +6,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function diffForHumans(date: string) {
-  const pastDate = new Date(date.replace(" ", "T"));
+export function diffForHumans(date: Date) {
+  const pastDate = new Date(date);
   const humanReadable = formatDistanceToNow(pastDate, { addSuffix: true });
   return humanReadable;
 }
