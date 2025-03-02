@@ -1,4 +1,4 @@
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, EditIcon, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -6,8 +6,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { diffForHumans } from "@/lib/utils";
 import { Article } from "@/lib/types";
 import { articles } from "@/db/schema";
+import { Button } from "./ui/button";
 
-function Card({ article }: { article: Article }) {
+type CardProps = {
+  type: "private" | "general";
+  article: Article;
+};
+
+function Card({ article, type }: CardProps) {
   return (
     <div className="w-full space-y-4">
       <Link href={"/"}>
@@ -44,15 +50,30 @@ function Card({ article }: { article: Article }) {
           </Link>
 
           <div className="flex pt-1.5 justify-between">
-            <Link href={"/"} className="flex items-center gap-2">
-              <Avatar className="cursor-pointer w-4 h-4 md:w-7 md:h-7">
-                <AvatarImage src={article.user?.image || ""} />
-                <AvatarFallback>{article.user?.name}</AvatarFallback>
-              </Avatar>
-              <p className="font-semibold  text-[8px] md:text-[12px]">
-                {article?.user?.name}
-              </p>
-            </Link>
+            {type !== "private" ? (
+              <Link href={"/"} className="flex items-center gap-2">
+                <Avatar className="cursor-pointer w-4 h-4 md:w-7 md:h-7">
+                  <AvatarImage src={article.user?.image || ""} />
+                  <AvatarFallback>{article.user?.name}</AvatarFallback>
+                </Avatar>
+                <p className="font-semibold  text-[8px] md:text-[12px]">
+                  {article?.user?.name}
+                </p>
+              </Link>
+            ) : (
+              <div className="flex gap-3 justify-end">
+                <Link href={"#"}>
+                  <Button variant={"destructive"}>
+                    Delete <TrashIcon />
+                  </Button>
+                </Link>
+                <Link href={"#"}>
+                  <Button>
+                    Edit <EditIcon />
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>

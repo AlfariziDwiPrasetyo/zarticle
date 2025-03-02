@@ -20,8 +20,6 @@ async function page() {
     return <div>Not authenticated</div>;
   }
 
-  console.log(user.articles);
-
   return (
     <div className="flex flex-col lg:flex-row">
       <section className="p-10 flex flex-col lg:justify-start lg:items-start justify-center items-center">
@@ -48,7 +46,7 @@ async function page() {
           {user.articles.length > 0 ? (
             <div className="grid lg:grid-cols-2 gap-5">
               {user.articles?.map((article) => (
-                <Card key={article.id} article={article} />
+                <Card type="private" key={article.id} article={article} />
               ))}
             </div>
           ) : (

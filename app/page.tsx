@@ -9,6 +9,7 @@ import ArticlesList from "@/components/ArticlesList";
 import { Suspense } from "react";
 import UsersList from "@/components/UsersList";
 import CategoriesList from "@/components/CategoriesList";
+import { ScaleLoader } from "react-spinners";
 
 export default async function Home() {
   return (
@@ -64,7 +65,13 @@ export default async function Home() {
             <div className="px-2">
               <h3 className="font-semibold">Recommended Topics</h3>
               <div className="my-5">
-                <Suspense fallback={<p className="text-center">Loading....</p>}>
+                <Suspense
+                  fallback={
+                    <div className="flex justify-center">
+                      <ScaleLoader />
+                    </div>
+                  }
+                >
                   <ul className="flex flex-wrap gap-2 [&>*]:px-4 [&>*]:bg-[#F2F2F2] [&>*]:flex [&>*]:items-center [&>*]:justify-center [&>*]:text-black [&>*]:py-2 [&>*]:rounded-full">
                     <CategoriesList />
                   </ul>
@@ -74,7 +81,13 @@ export default async function Home() {
             <div className="px-2">
               <h3 className="font-semibold">Top Writers</h3>
               <div className="my-5">
-                <Suspense fallback={<p className="text-center">Loading....</p>}>
+                <Suspense
+                  fallback={
+                    <div className="flex justify-center">
+                      <ScaleLoader />
+                    </div>
+                  }
+                >
                   <ul className="space-y-4">
                     <UsersList />
                   </ul>

@@ -7,7 +7,7 @@ async function ArticlesList() {
   return (
     <>
       {articles?.data?.map((article) => (
-        <Card key={article.id} article={article} />
+        <Card type="general" key={article.id} article={article} />
       ))}
     </>
   );
